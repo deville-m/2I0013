@@ -33,7 +33,7 @@ def finJeu(jeu):
     """ jeu -> bool
         Retourne vrai si c'est la fin du jeu
     """
-    if (getCoupsValides(jeu) == []):
+    if getCoupsValides(jeu) == [] or len(jeu[4]) > 100:
         return True
     else:
         return False
@@ -44,9 +44,18 @@ def saisieCoup(jeu):
         On suppose que la fonction n'est appelee que si il y a au moins un coup valide possible
         et qu'elle retourne obligatoirement un coup valide
     """
-    print "Liste des coups valides", jeu[3]
-    indice = int(raw_input("Entrer l'indice du coup a jouer parmis ceux disponibles: "))
-    return jeu[3][indice]
+    j = getJoueur(jeu)
+    if j == 1:
+        j = joueur1
+    else:
+        j = joueur2
+        
+    c = j.saisieCoup(getCopieJeu(jeu))
+
+    while (not coupValide(jeu, c)):
+        print "Coup n'est pas valide, recommencez"
+        c = J.saisieCoup(getCopieJeu(jeu))
+    return c
 
 def joueCoup(jeu,coup):
     """ jeu*coup->void
@@ -54,7 +63,7 @@ def joueCoup(jeu,coup):
         Hypothese:le coup est valide
         Met tous les champs de jeu à jour (sauf coups valides qui est fixée à None)
     """
-    game.joueCoups(jeu, coup)
+    game.joueCoup(jeu, coup)
 
 def initialiseJeu():
     """ void -> jeu
@@ -67,7 +76,12 @@ def getGagnant(jeu):
     Retourne le numero du joueur gagnant apres avoir finalise la partie. Retourne 0 si match nul
     """
     if (finJeu(jeu)):
-        return jeu[-1].index(max(jeu[-1]))
+        if (jeu[-1][0] > jeu[-1][1]):
+            return 1
+        elif (jeu[-1][1] > jeu[-1][0]:
+            return 2
+        else:
+            return 0
     else:
         print "Jeu non termine"
 
@@ -131,12 +145,21 @@ def getCoupsJoues(jeu):
     """
     return jeu[2]
 
+def resetCoupsValides(jeu):
+    """ Jeu -> None
+    Remet à none la liste des coups valides
+    """
+    jeu[3] = None
+
 def getCoupsValides(jeu):
     """ jeu  -> List[coup]
         Retourne la liste des coups valides dans le jeu passe en parametre
         Si None, alors on met à jour la liste des coups valides
     """
-    return jeu[3] if jeu[3] != None else game.getCoupsValides(jeu)
+    if jeu[3] == None:
+        jeu[3] = game.getCoupsValides(jeu)
+    else:
+        return jeu[3]
     
 def getScores(jeu):
     """ jeu  -> Pair[nat nat]
