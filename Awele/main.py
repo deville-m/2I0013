@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import awele
 import sys
 sys.path.append("..")
@@ -11,9 +12,10 @@ game.joueur2=joueur_humain
 jeu = game.initialiseJeu()
 
 while not game.finJeu(jeu):
-    game.afficherJeu(jeu)
+    game.affiche(jeu)
     coup = game.saisieCoup(jeu)
     game.joueCoup(jeu, coup)
 
-g = game.getGagant(jeu)
-game.afficherJeu(jeu)
+g = game.getGagnant(jeu)
+game.affiche(jeu)
+print "Le gagant est : %d" %  g

@@ -1,5 +1,5 @@
-from copy import deepcopy
 # -*- coding: utf-8 -*-
+from copy import deepcopy
 # plateau: List[List[nat]]
 # liste de listes (lignes du plateau) d'entiers correspondant aux contenus des cases du plateau de jeu
 
@@ -26,17 +26,17 @@ def getCopieJeu(jeu):
         Retourne une copie du jeu passe en parametre
         Quand on copie un jeu on en calcule forcement les coups valides avant
     """
-    jeu[3] = game.getCoupsValides(jeu)
+    jeu[2] = game.getCoupsValides(jeu)
     return deepcopy(jeu)
 
 def finJeu(jeu):
     """ jeu -> bool
         Retourne vrai si c'est la fin du jeu
     """
-    if getCoupsValides(jeu) == [] or len(jeu[4]) > 100:
-        return True
-    else:
-        return False
+    return game.finJeu(jeu)
+
+def coupValide(jeu, c):
+    return c in jeu[2]
 
 def saisieCoup(jeu):
     """ jeu -> coup
@@ -54,14 +54,14 @@ def saisieCoup(jeu):
 
     while (not coupValide(jeu, c)):
         print "Coup n'est pas valide, recommencez"
-        c = J.saisieCoup(getCopieJeu(jeu))
+        c = j.saisieCoup(getCopieJeu(jeu))
     return c
 
 def joueCoup(jeu,coup):
     """ jeu*coup->void
         Joue un coup a l'aide de la fonction joueCoup defini dans le module game
         Hypothese:le coup est valide
-        Met tous les champs de jeu à jour (sauf coups valides qui est fixée à None)
+        Met tous les champs de jeu à jour (sauf coups valides qui est fixee à None)
     """
     game.joueCoup(jeu, coup)
 
@@ -78,7 +78,7 @@ def getGagnant(jeu):
     if (finJeu(jeu)):
         if (jeu[-1][0] > jeu[-1][1]):
             return 1
-        elif (jeu[-1][1] > jeu[-1][0]:
+        elif (jeu[-1][1] > jeu[-1][0]):
             return 2
         else:
             return 0
@@ -113,7 +113,7 @@ def affiche(jeu):
                     
          Hypothese : le contenu de chaque case ne depasse pas 5 caracteres
     """
-    if (jeu [2] != None): print "Coup joue = ", jeu[2][-1]
+    if (jeu [3] != []): print "Coup joue = ", jeu[3][-1]
     print "Scores = ", jeu[4][0], jeu[4][1]
     print "Plateau : "
     
@@ -139,27 +139,29 @@ def getPlateau(jeu):
     """
     return jeu[0]
 
+def addCoupJoue(jeu, coup):
+    jeu[3].append(coup)
+
 def getCoupsJoues(jeu):
     """ jeu  -> List[coup]
         Retourne la liste des coups joues dans le jeu passe en parametre
     """
-    return jeu[2]
+    return jeu[3]
 
 def resetCoupsValides(jeu):
     """ Jeu -> None
     Remet à none la liste des coups valides
     """
-    jeu[3] = None
+    jeu[2] = None
 
 def getCoupsValides(jeu):
     """ jeu  -> List[coup]
         Retourne la liste des coups valides dans le jeu passe en parametre
         Si None, alors on met à jour la liste des coups valides
     """
-    if jeu[3] == None:
-        jeu[3] = game.getCoupsValides(jeu)
-    else:
-        return jeu[3]
+    if jeu[2] == None:
+        jeu[2] = game.getCoupsValides(jeu)
+    return jeu[2]
     
 def getScores(jeu):
     """ jeu  -> Pair[nat nat]
@@ -177,7 +179,7 @@ def changeJoueur(jeu):
     """ jeu  -> void
         Change le joueur a qui c'est le tour de jouer dans le jeu passe en parametre (1 ou 2)
     """
-    jeu[1] = 2 if jeu[1] == 1 else 2
+    jeu[1] = 2 if jeu[1] == 1 else 1
 
 def getScore(jeu,joueur):
     """ jeu*nat->int
@@ -185,6 +187,9 @@ def getScore(jeu,joueur):
         Hypothese: le joueur est 1 ou 2
     """
     return jeu[4][joueur - 1]
+
+def setCaseVal(jeu, ligne, colonne, val):
+    jeu[0][ligne][colonne] = val
 
 def getCaseVal(jeu, ligne, colonne):
     """ jeu*nat*nat -> nat
