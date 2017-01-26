@@ -16,3 +16,17 @@ def initplateau():
             [0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0]]
+
+def finJeu(jeu):
+    
+    if game.getCoupsValides(jeu) == [] or len(jeu[4]) > 64:
+        return True
+    else:
+        return False
+
+def joueCoup(jeu, coup):
+    game.setCaseVal(jeu, coup[0], coup[1], jeu[1])
+    convertis(jeu, coup[0], coup[1])
+    game.addCoupJoue(jeu, coup)
+    game.changeJoueur(jeu)
+    game.resetCoupsValides(jeu)

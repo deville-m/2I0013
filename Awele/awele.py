@@ -80,15 +80,15 @@ def advaff(jeu):
         j = 1
     elif jeu[1] == 2:
         j = 0
-    aff = True
+
     for nbgraines in jeu[0][j]:
         if nbgraines > 0:
-            aff = False
-    return aff
+            return False
+    return True
 
 def coups(jeu):
     cases = [[jeu[1] - 1, x] for x in range(6)]
-    return [coup for coup in cases if game.getCaseVal(jeu, coup[0], coup[1])]
+    return [coup for coup in cases if game.getCaseVal(jeu, coup[0], coup[1]) != 0]
 
 def getCoupsValides(jeu):
     a = advaff(jeu)
@@ -100,9 +100,9 @@ def getCoupsValides(jeu):
 
     for coup in cp:
         c = coup[1]
-        p = coup[0]
+        l = coup[0]
         g = game.getCaseVal(jeu, l, c)
-        if p == 0:
+        if l == 0:
             if g > c:
                 v.append(coup)
         else:
