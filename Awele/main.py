@@ -13,6 +13,7 @@ jeu = game.initialiseJeu()
 
 while not game.finJeu(jeu):
     game.affiche(jeu)
+    game.getCoupsValides(jeu)
     coup = game.saisieCoup(jeu)
     game.joueCoup(jeu, coup)
 

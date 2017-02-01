@@ -26,7 +26,7 @@ def getCopieJeu(jeu):
         Retourne une copie du jeu passe en parametre
         Quand on copie un jeu on en calcule forcement les coups valides avant
     """
-    jeu[2] = game.getCoupsValides(jeu)
+    jeu[2] = getCoupsValides(jeu)
     return deepcopy(jeu)
 
 def finJeu(jeu):

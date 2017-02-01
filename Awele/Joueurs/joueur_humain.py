@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-import sys
-sys.path.append("../..")
-import game
 
 def saisieCoup(jeu):
     """ jeu -> coup

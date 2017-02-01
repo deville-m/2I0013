@@ -8,5 +8,18 @@ import joueur_humain
 game.joueur1=joueur_humain
 game.joueur2=joueur_humain
 
+jeu = game.initialiseJeu()
+
+while not game.finJeu(jeu):
+    game.affiche(jeu)
+    game.getCoupsValides(jeu)
+    coup = game.saisieCoup(jeu)
+    game.joueCoup(jeu, coup)
+
+g = game.getGagnant(jeu)
+game.affiche(jeu)
+
+print "Le gagant est : %d" %  g
+
 
 
