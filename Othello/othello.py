@@ -24,7 +24,7 @@ def initplateau():
             
 def finJeu(jeu):
     
-    if game.getCoupsValides(jeu) == [] or len(jeu[4]) > 64:
+    if game.getCoupsValides(jeu) == [] or len(jeu[3]) > 64:
         return True
     else:
         return False
