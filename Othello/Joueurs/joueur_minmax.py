@@ -3,17 +3,29 @@ import sys
 sys.path.append("../..")
 import game
 
-prof = 2
+prof = 1
 
-def evaluation (jeu, score):
+def evaluation (jeu):
     #retourne un score d'evaluation
-    return jeu[4][moi] - score[moi]
+	score = 0
+	for x in range(8):
+		for y in range(8):
+			add = 1
+			if (x == 0 or y == 0 or x == 7 or y==7):
+				add = 3
+			elif (x==0 and y==0) or (x==0 and y==7) or (x==7 and y==0) or (x==7 and y==7):
+				add = 5
+			if (jeu[0][x][y] == moi):
+				score += add
+			elif (jeu[0][x][y] == adv):
+				score -= add
+    
+	return score
 
 
 def estimation (jeu, coup, p):
     #retourne le score d'utilite pour un coup donne
     copie = game.getCopieJeu(jeu)
-    score_avant = copie[4]
     game.joueCoup(copie, coup)
     if game.finJeu(copie):
         g = game.getGagnant(copie)
@@ -26,7 +38,7 @@ def estimation (jeu, coup, p):
                 return -10000
 
     if p == prof:
-        return evaluation(copie, score_avant)
+        return evaluation(copie)
     
     if p < prof:
         coups = game.getCoupsValides(copie)
@@ -52,7 +64,8 @@ def decision(jeu, coups):
     return max_coup
 
 def saisieCoup(jeu):
-    global moi
-    moi = game.getJoueur(jeu) - 1
-    coup = decision(jeu, game.getCoupsValides(jeu))
-    return coup
+	global moi, adv
+	moi = game.getJoueur(jeu)
+	adv = moi % 2 + 1
+	coup = decision(jeu, game.getCoupsValides(jeu))
+	return coup
