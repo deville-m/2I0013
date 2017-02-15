@@ -8,8 +8,9 @@ sys.path.append("./Joueurs")
 import joueur_humain
 import joueur_prem_coup
 import joueur_aleatoire
-game.joueur1=joueur_aleatoire
-game.joueur2=joueur_aleatoire
+import joueur_IA
+game.joueur1=joueur_IA
+game.joueur2=joueur_humain
 
 resultat = [0, 0]
 for i in range(1000):
