@@ -2,19 +2,46 @@
 import sys
 sys.path.append("../..")
 import game
-
-prof = 1
+prof = 2
 
 def evaluation (jeu):
     #retourne un score d'evaluation
+		
 	score = 0
 	for x in range(8):
 		for y in range(8):
 			add = 1
+
+			if (x==0 and y==1) or (x==1 and 0<=y<=1):
+				if jeu[0][0][0] == moi:
+					add = 5
+				else:
+					add = -5
+
+			elif (x==0 and y==6) or (x==1 and 6<=y<=7):
+				if jeu[0][7][0] == moi:
+					add = 5
+				else:
+					add = -5
+
+			elif (x==7 and y==1) or (x==6 and 0<=y<=1):
+				if jeu[0][0][7] == moi:
+					add = 5
+				else:
+					add = -5
+
+			elif (x==7 and y==6) or (x==6 and 6<=y<=7):
+				if jeu[0][7][7] == moi:
+					add = 5
+				else:
+					add = -5
+
 			if (x == 0 or y == 0 or x == 7 or y==7):
-				add = 3
-			elif (x==0 and y==0) or (x==0 and y==7) or (x==7 and y==0) or (x==7 and y==7):
 				add = 5
+
+			elif (x==0 and y==0) or (x==0 and y==7) or (x==7 and y==0) or (x==7 and y==7):
+				add = 25
+
 			if (jeu[0][x][y] == moi):
 				score += add
 			elif (jeu[0][x][y] == adv):
@@ -30,12 +57,12 @@ def estimation (jeu, coup, p):
     if game.finJeu(copie):
         g = game.getGagnant(copie)
         if g == moi:
-            return 10000
+            return 100000
         else:
             if g == 0:
                 return -100
             else:
-                return -10000
+                return -100000
 
     if p == prof:
         return evaluation(copie)

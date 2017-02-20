@@ -5,12 +5,12 @@ sys.path.append("..")
 import game
 game.game=othello
 sys.path.append("./Joueurs")
-import joueur_humain
 import joueur_prem_coup
-import joueur_aleatoire
 import joueur_minmax
+import joueur_aleatoire
+import joueur_alphabeta
 game.joueur1=joueur_aleatoire
-game.joueur2=joueur_minmax
+game.joueur2=joueur_alphabeta
 
 resultat = [0, 0]
 for i in range(1000):
