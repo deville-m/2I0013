@@ -77,7 +77,7 @@ def evaluation (jeu):
             elif (x == 7 and y == 6) or (x == 6 and 6 <= y <= 7):
                 if jeu[0][7][7] == moi:
                     add = 5
-                else:nautilus touche suppr
+                else:
                     add = -5
 
             if (x == 0 or y == 0 or x == 7 or y == 7):
