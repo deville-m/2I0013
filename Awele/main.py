@@ -9,7 +9,7 @@ import joueur_humain
 import joueur_agauche
 import joueur_aleatoire
 import joueur_alphabeta
-game.joueur1=joueur_aleatoire
+game.joueur1=joueur_humain
 game.joueur2=joueur_alphabeta
 
 resultat = [0, 0]

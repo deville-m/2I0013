@@ -3,7 +3,7 @@ import sys
 sys.path.append("../..")
 import game
 
-prof = 5
+prof = 6
 
 def evaluation(jeu):
     return jeu[-1][moi - 1] - jeu[-1][adv - 1]
@@ -14,6 +14,7 @@ def estimation (jeu, coup, alpha, beta, p):
     #retourne le score d'utilite pour un coup donne
     copie = game.getCopieJeu(jeu)
     game.joueCoup(copie, coup)
+    m = -100000 if p % 2 == 0 else 100000
     if game.finJeu(copie):
         g = game.getGagnant(copie)
         if g == moi:
@@ -29,37 +30,39 @@ def estimation (jeu, coup, alpha, beta, p):
 
     if p < prof:
 	coups = game.getCoupsValides(copie)
+	coups = trieCoups(coups) if p % 2 == 0 else trieCoupsInverse(coups)
+	
+        for c in coups:
+            s = estimation(copie, c, alpha, beta, p+1)
+            if p % 2 == 0:
+                if s >= beta:
+                    return beta+1
+                if s > m:
+                    alpha = max(alpha,s)
+                    m = s
 
-    for c in coups:
-        s = estimation(copie, c, alpha, beta, p+1)
-        if p % 2 == 0:
-            if s >= beta:
-                return beta
-            if s > alpha:
-                alpha = s
-
-        if p % 2 != 0:
-            if s <= alpha:
-                return alpha
-            if s < beta:
-                beta = s
-
-    return alpha if p % 2 == 0 else beta
-
+            if p % 2 != 0:
+                if s <= alpha:
+                    return alpha-1
+                if s < m:
+                    beta = min(beta, s)
+                    m = s
+                    
+        return m
+    
 def decision(jeu, coups):
     #retourne le meilleur  coup et son score
-    alpha = -100000
-    beta = 100000
-    alpha = estimation(jeu, coups[0], alpha, beta, 1)
+    alpha = -10000000000
+    beta = 10000000000
+    trieCoups(coups)
     max_coup = coups[0]
 
     for c in coups:
         s = estimation(jeu, c, alpha, beta, 1)
-	if s >= beta:
-            break
     	if s > alpha:
     	    alpha = s
-	    max_coup = c
+            max_coup = c
+#        print "coup "+str(c)+"="+str(s)
 
     return max_coup
 
