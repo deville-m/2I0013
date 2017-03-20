@@ -103,12 +103,12 @@ def estimation (jeu, coup, alpha, beta, p):
     if game.finJeu(copie):
         g = game.getGagnant(copie)
         if g == moi:
-            return 10000
+            return 100000000
         else:
             if g == 0:
-                return -100
+                return -500
             else:
-                return -10000
+                return -100000000
 
     if p == prof:
         return evaluation(copie)
@@ -137,8 +137,8 @@ def estimation (jeu, coup, alpha, beta, p):
     
 def decision(jeu, coups):
     #retourne le meilleur  coup et son score
-    alpha = -10000000000
-    beta = 10000000000
+    alpha = -100000000
+    beta = 100000000
     trieCoups(coups)
     max_coup = coups[0]
 

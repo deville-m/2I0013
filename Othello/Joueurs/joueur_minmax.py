@@ -58,12 +58,12 @@ def estimation (jeu, coup, p):
     if game.finJeu(copie):
         g = game.getGagnant(copie)
         if g == moi:
-            return 100000
+            return 100000000
         else:
             if g == 0:
-                return -100
+                return -500
             else:
-                return -100000
+                return -100000000
 
     if p == prof:
         return evaluation(copie)
