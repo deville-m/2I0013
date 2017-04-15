@@ -8,9 +8,9 @@ sys.path.append("./Joueurs")
 import joueur_prem_coup
 import joueur_minmax
 import joueur_aleatoire
-import joueur_alphabeta2
+import joueur_alphabeta
 game.joueur1=joueur_prem_coup
-game.joueur2=joueur_alphabeta2
+game.joueur2=joueur_alphabeta
 
 resultat = [0, 0]
 for i in range(1):
@@ -19,7 +19,6 @@ for i in range(1):
     while not game.finJeu(jeu):
         game.getCoupsValides(jeu)
         coup = game.saisieCoup(jeu)
-        print ("Joueur", game.getJoueur(jeu), "coup joue : ", coup)
         game.joueCoup(jeu, coup)
 
     g = game.getGagnant(jeu)

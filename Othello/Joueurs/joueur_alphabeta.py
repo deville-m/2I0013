@@ -3,7 +3,7 @@ import sys
 sys.path.append("../..")
 import game
 
-prof = 2
+prof = 4
 
 def trieCoups(coups):
     ordre = 0
