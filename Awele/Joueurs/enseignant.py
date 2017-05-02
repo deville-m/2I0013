@@ -3,24 +3,21 @@ import sys
 sys.path.append("../..")
 import game
 
-prof = 3
-cpt = 0
+prof = 6
 
 def evaluation(jeu):
-    return jeu[-1][moi - 1] - jeu[-1][adv - 1]
+    return jeu[-1][0] - jeu[-1][1]
 
 # Generique
 
 def estimation (jeu, coup, alpha, beta, p):
     #retourne le score d'utilite pour un coup donne
-    global cpt
-    cpt += 1
     copie = game.getCopieJeu(jeu)
     game.joueCoup(copie, coup)
     m = -100000 if p % 2 == 0 else 100000
     if game.finJeu(copie):
         g = game.getGagnant(copie)
-        if g == moi:
+        if g == 1:
             return 10000
         else:
             if g == 0:
@@ -68,8 +65,5 @@ def decision(jeu, coups):
     return max_coup
 
 def saisieCoup(jeu):
-    global moi, adv
-    moi = game.getJoueur(jeu)
-    adv = moi % 2 + 1
     coup = decision(jeu, game.getCoupsValides(jeu))
     return coup

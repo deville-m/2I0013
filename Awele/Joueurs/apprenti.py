@@ -21,7 +21,7 @@ import random
 """
 prof = 1
 global params
-params=[6,-1,3]
+params=[0, 0, 0]
 
 #	----------------------	METTRE VOS FONCTIONS DE BASE ----------------------
 #	----------------------	METTRE VOS FONCTIONS DE BASE ----------------------
@@ -107,7 +107,7 @@ def f1(jeu):
 def f3(jeu):
 	"""
 		jeu*jeu -> float
-		pas de cases qui se suive
+		pas de cases qui se suivent
 	"""
 	l=[]
 	# if moi==1:
@@ -126,7 +126,7 @@ def f3(jeu):
 def f2(jeu):
 	"""
 		jeu*jeu -> float
-		cases qui se suive chez l'autre
+		cases qui se suivent chez l'autre
 	"""
 	l=[]
 	i=0

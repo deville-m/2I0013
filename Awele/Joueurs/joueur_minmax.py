@@ -4,6 +4,7 @@ sys.path.append("../..")
 import game
 
 prof = 2
+cpt = 0
 
 def evaluation (jeu):
     #retourne un score d'evaluation
@@ -13,6 +14,8 @@ def evaluation (jeu):
 
 def estimation (jeu, coup, p):
     #retourne le score d'utilite pour un coup donne
+    global cpt
+    cpt += 1
     copie = game.getCopieJeu(jeu)
     game.joueCoup(copie, coup)
     if game.finJeu(copie):

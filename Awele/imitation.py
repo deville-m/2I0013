@@ -1,25 +1,26 @@
 # -*- coding: utf-8 -*-
 import matplotlib.pyplot as plt
 import numpy as np
-import othello
+import awele
 import sys
 sys.path.append("..")
 import game
 game.game=awele
 sys.path.append("./Joueurs")
-import joueur_aleatoire
-import joueur_prem_coup
+import random
+import joueur_agauche
 import apprenti
+import enseignant
 import joueur_alphabeta
 
 game.joueur1 = apprenti
-game.joueur2 = joueur_1er_coup_valide
+game.joueur2 = joueur_alphabeta
 
 #	----------------------	METTRE VOTRE MEILLEUR JOUEUR ----------------------
 #	----------------------	METTRE VOTRE MEILLEUR JOUEUR ----------------------
 #	----------------------	METTRE VOTRE MEILLEUR JOUEUR ----------------------
 
-oracle = joueur_alphabeta
+oracle = enseignant
 
 #	----------------------	METTRE VOTRE MEILLEUR JOUEUR ----------------------
 #	----------------------	METTRE VOTRE MEILLEUR JOUEUR ----------------------
