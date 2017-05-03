@@ -6,26 +6,10 @@ import copy
 sys.path.append("../..")
 import game
 import random
-"""
-	coeff1=>attaque
-	coeff2=>preparation attaque
-	coeff3=>defense
-	prof=>horizon max d'anticipation
 
-	/!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!
-	on a viré toutes les occurences de moi/autre
-	car cela foutais le bordel, de plus on est parti
-	du principe que l'oracle et l'élève sont toujours
-	en joueur 1
-	/!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!
-"""
 prof = 1
 global params
 params=[0, 0, 0]
-
-#	----------------------	METTRE VOS FONCTIONS DE BASE ----------------------
-#	----------------------	METTRE VOS FONCTIONS DE BASE ----------------------
-#	----------------------	METTRE VOS FONCTIONS DE BASE ----------------------
 
 def estimation (jeu, coup, a, b, p):
     #retourne le score d'utilite pour un coup donne
@@ -86,22 +70,12 @@ def saisieCoup(jeu):
 	coup = decision(jeu,game.getCoupsValides(jeu))
 	return coup
 
-#	----------------------	METTRE VOS FONCTIONS DE BASE ----------------------
-#	----------------------	METTRE VOS FONCTIONS DE BASE ----------------------
-#	----------------------	METTRE VOS FONCTIONS DE BASE ----------------------
-
-
-
-#	----------------------	METTRE VOS FONCTIONS ----------------------
-#	----------------------	METTRE VOS FONCTIONS ----------------------
-#	----------------------	METTRE VOS FONCTIONS ----------------------
-
 def f1(jeu):
 	"""
 		jeu*jeu -> float
 		Retourne un nombre compris entre [0,1] qui evalue l'effacite d'un coup joue par rapport au score
 	"""
-	return float(game.getScore(jeu,1)-game.getScore(jeu,2))/18
+	return float(game.getScore(jeu,1)-game.getScore(jeu,2))
 
 
 def f3(jeu):
@@ -151,10 +125,6 @@ def caseSuivante(jeu, case):
 	elif case == [1,5] : return [0,5]
 	elif case[0] == 0 : return [0,case[1] - 1]
 	return [1,case[1] + 1]
-
-#	----------------------	METTRE VOS FONCTIONS ----------------------
-#	----------------------	METTRE VOS FONCTIONS ----------------------
-#	----------------------	METTRE VOS FONCTIONS ----------------------
 
 def evaluation(jeu):
 	"""
