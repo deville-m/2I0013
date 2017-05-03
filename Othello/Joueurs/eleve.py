@@ -85,7 +85,7 @@ def f1(jeu):
 
 def f2(jeu):
         """
-                Retourne le nombre de cases adjacentes appartenant au joueur
+                Retourne le nombre de cases adjacentes aux coins appartenant au joueur
         """
         add = 0
         for case in [[0, 1], [1, 1], [1, 0], [1, 7], [0, 6], [1, 6], [6, 0], [6, 1], [7, 1], [6, 7], [6, 6], [7, 6]]:
